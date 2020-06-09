@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+{% extends 'DetailsApp/base.html' %}
+{% load static %}
+{% block body_block %}
+<h2 style="color:#000;Text-align:center;">{{Domain}}</h2>
+<div class="container" >
+
+      {{message}}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script > jQuery(document).ready(function() {
+      jQuery('.tabs .tab-links a').on('click', function(e) {
+        var currentAttrValue = jQuery(this).attr('href');
+
+        // Show/Hide Tabs
+        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+
+        // Change/remove current tab to active
+
+        jQuery(this).parent('td').addClass('active').siblings().removeClass('active');
+        $('h3').addClass("myClassa");
+        //jQuery(this).parent('th').addClass('myClassa').siblings().removeClass('myClassa');
+        e.preventDefault();
+      });
+    });</script>
+    <style>
+    .myClassa {
+                color: #4CAF50;
+
+            }
+    .myClassb {
+                background-color: black;
+                color: white;
+              }
+    </style>
+{% if access_records %}
+  <div class="tabs">
+    <ul class="tab-links">
+    <table style="cellpadding=20px ;">
+<thead>{% for acc1 in access_records%}
+<th style="margin-left: 10px;" {% if  acc1.id == 1 %}  class="active myClassa" style="color: #4CAF50;"  {% endif %}>
+<h3><a style="color: #ffffff;text-decoration:none;" href="#tab{{ acc1.Category }}">{{ acc1.Category }}</a></h3></th>
+{% endfor %}
+</thead>
+
+      </table>
+</ul>
+	<div class="tab-content">
+
+
+    {% for ac in access_recordsd%}
+
+
+  {% if  ac.id == 1 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+
+  {% for acc in access1 %}
+
+
+    <tr>
+        <td>{{acc.id}}</td>
+        <td>{{acc.Insight}}</td>
+        <td>{{acc.BusinessImplication}}</td>
+        <td>{{acc.Recordcount}}</td>
+        <td>{{acc.LastRefreshedOn}}</td>
+        <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+    <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+    <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+        color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+   </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 2 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access2 %}
+
+
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 3 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access3 %}
+
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 4 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access4 %}
+
+
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 5 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access5 %}
+
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 6 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access6 %}
+
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+  {% if  ac.id == 7 %}
+  <div {% if  ac.id == 1 %}  class="tab active" {% endif %}
+  id="tab{{ ac.Category }}" class="tab">  <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Insight</th>
+            <th>Business Implication</th>
+            <th>Recordcount</th>
+            <th>LastRefreshedOn</th>
+            <th>Details</th>
+            <th>Refresh</th>
+
+        </thead>
+
+
+<tbody>
+  {% for acc in access7 %}
+  <tr>
+      <td>{{acc.id}}</td>
+      <td>{{acc.Insight}}</td>
+      <td>{{acc.BusinessImplication}}</td>
+      <td>{{acc.Recordcount}}</td>
+      <td>{{acc.LastRefreshedOn}}</td>
+      <td><button  class="btn btn-dark buttonc" type="Details" value="Details">
+  <a style="text-decoration: none;color:#FFFFFF;" href="/details/{{acc.id}}">Details Table</a></button></td>
+  <td><button  class="btn btn-dark buttonc"><a style="text-decoration: none;
+      color:#FFFFFF;" href="/refresh/{{DomainID}}/{{acc.id}}">Refresh</a></button></td>
+ </tr>
+
+  {%endfor%}
+</tbody>
+</table>
+  {% endif %}
+	</div>
+		{% endfor %}
+	</div>
+  {% else %}
+    <p> No Records Found in Database</p>
+  {% endif %}
+
+</div>
+</div>
+  {% endblock %}

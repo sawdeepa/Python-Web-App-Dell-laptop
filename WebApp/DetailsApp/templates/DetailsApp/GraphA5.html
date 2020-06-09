@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% extends 'DetailsApp/base.html' %}
+{% load static %}
+{% block body_block %}
+<div class="djangomodel graphdetails"
+     <div>
+     {% if access_records %}
+     {% for acc in access_records%}
+                  <h2><span>Domain: {{acc.Domain}}</span></h2><br/>
+
+                   <h3> <p>{{acc.id}} Insight: {{acc.Insight}}</p></h3><br/>
+                   <h3><p>BusinessImplication:{{acc.BusinessImplication}}</p></h3><br/>
+                   <h3> <p>Recordcount: {{acc.Recordcount}}</p></h3><br/>
+                   <h3> <p>LastRefreshedOn: {{acc.LastRefreshedOn}}</p></h3><br/>
+                    <h3> <p>Query: {{acc.Query}}</p></h3><br/>
+     {%endfor%}
+     {% endif%}
+     </div>
+
+ <div id="top_x_div"  class='chart' style="width: 100% ; height: 100%;" >
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+      var arr=new Array([{{Query|safe}}]);
+    console.log(arr[0][0][1]);
+    console.log(typeof(arr[0][0][1]));
+        var data = new google.visualization.arrayToDataTable(arr[0][0]);
+
+        var options = {
+          title: '{{Insight}}',
+
+          legend: { position: 'none' },
+          chart: { title: '{{Insight}}',
+                   subtitle: '{{SSubtitle}}' },
+          bars: 'horizontal', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Numbers'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        chart.draw(data, options);
+      };
+    </script>
+
+    </div>
+    </div>
+<div style="text-align: center; margin: 0 auto 0 auto;">
+<form>
+
+    <div>
+  <h1><strong>SQLOUTPUT</strong></h1>
+    <br>
+     <ul>
+          <div>
+    <input class="btn btn-dark buttonc" type="button" value="Download" onclick="window.open('{{ID}}/download_zip')"
+  </div>
+  <br></br>
+    <div class="table-responsive">
+      <table style="width: 92%; text-align:center;margin: 0 auto 0 auto;"
+             cellpadding="10px" border="2px"  class="table table-striped .table-bordered .table-dark" >
+            <tbody>
+          {% for user in users %}
+
+          <tr>
+              {% for n in user %}
+          <td>{{ n }}</td>
+              {% endfor %}
+          </tr>
+
+          {% endfor%}
+          </tbody>
+      </table>
+    </div>
+          {% if users.has_other_pages %}
+  <ul class="pagination">
+    {% if users.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</ul>
+</form>
+</div></form>
+</div>
+
+
+    {% endblock %}

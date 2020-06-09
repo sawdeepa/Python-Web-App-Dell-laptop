@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends 'DetailsApp/base.html' %}
+{% load static %}
+{% block body_block %}
+<div style="text-align: center; margin: 0 auto 0 auto;">
+     <div class="djangomodel">
+
+     {% if access_records %}
+     {% for acc in access_records%}
+                  <h2><span>Domain: {{acc.Domain}}</span></h2>
+                    <p><span>{{acc.id}}</span> Insight: {{acc.Insight}}</p>
+                    <p>BusinessImplication:{{acc.BusinessImplication}}</p>
+                    <p>Recordcount: {{acc.Recordcount}}</p>
+                    <p>LastRefreshedOn: {{acc.LastRefreshedOn}}</p>
+
+     {%endfor%}
+     {% endif%}
+
+</div>
+<form>
+
+    <div>
+  <h1><strong>SQLOUTPUT</strong></h1>
+    <br>
+      <ul>
+          <div>
+    <input class="btn btn-dark buttonc" type="button" value="Download" onclick="window.open('{{ID}}/download_zip')"
+  </div>
+  <br></br>
+    <div class="table-responsive">
+      <table style="width: 92%; text-align:center;margin: 0 auto 0 auto;"
+             cellpadding="10px" border="2px"  class="table table-striped .table-bordered .table-dark" >
+            <tbody>
+          {% for user in users %}
+
+          <tr>
+              {% for n in user %}
+          <td>{{ n }}</td>
+              {% endfor %}
+          </tr>
+
+          {% endfor%}
+          </tbody>
+      </table>
+    </div>
+          {% if users.has_other_pages %}
+  <ul class="pagination">
+    {% if users.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</ul>
+</form>
+</div></form>
+</div>
+
+
+    {% endblock %}
